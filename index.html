@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Đăng ký chuyên đề Sữa chua thảo mộc chăm sóc da - Kiku Bara Center</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #1f514b; --accent: #e3a94c; --bg: #faedd0; --white: #ffffff; --text-gray: #555555;
+}
+body {
+  font-family: 'Montserrat', sans-serif; background-color: var(--bg); color: var(--primary);
+  display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px 15px; box-sizing: border-box;
+}
+.container {
+  background: var(--white); padding: 35px 25px; border-radius: 16px; box-shadow: 0 12px 30px rgba(31, 81, 75, 0.15); max-width: 480px; width: 100%;
+  box-sizing: border-box;
+}
+.header { text-align: center; margin-bottom: 25px; }
+.subtitle { font-size: 12px; font-weight: 700; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; }
+.title { font-size: 20px; font-weight: 700; margin: 10px 0; line-height: 1.4; color: var(--primary); }
+.form-group { margin-bottom: 18px; }
+label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; color: var(--primary); }
+input {
+  width: 100%; padding: 14px; border: 1.5px solid #e0e0e0; border-radius: 8px;
+  font-family: 'Montserrat', sans-serif; font-size: 14px; box-sizing: border-box; transition: all 0.3s;
+}
+input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(31, 81, 75, 0.1); }
+button {
+  width: 100%; background-color: var(--primary); color: var(--white); border: none;
+  padding: 16px; font-size: 15px; font-weight: 700; border-radius: 8px; cursor: pointer;
+  font-family: 'Montserrat', sans-serif; transition: background 0.3s, transform 0.1s; margin-top: 10px;
+}
+button:hover { background-color: #163d38; }
+button:active { transform: scale(0.98); }
+button:disabled { background-color: #a0b2b0; cursor: not-allowed; }
+#qrSection, #freeSuccessSection { display: none; text-align: center; }
+.qr-box { border: 2px dashed var(--accent); padding: 20px; border-radius: 12px; margin: 20px 0; background: #fafafa; }
+.qr-box img { max-width: 85%; height: auto; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: block; margin: 0 auto; }
+.amount { font-size: 26px; font-weight: 700; color: var(--accent); margin: 15px 0 5px; }
+.transfer-content-box { margin-top: 15px; }
+.transfer-content {
+  background: var(--bg); padding: 10px 20px; border-radius: 8px; font-weight: 700;
+  font-size: 20px; color: var(--primary); letter-spacing: 1.5px; display: inline-block; border: 1px solid var(--accent); user-select: all;
+}
+.save-instruction {
+  background-color: #fff8e1; color: #b97700; padding: 12px; border-radius: 8px; font-size: 13px; font-weight: 600;
+  margin: 15px auto 5px auto; width: 90%; border: 1px dashed #e3a94c; line-height: 1.5;
+}
+.info-tip { font-size: 13px; color: var(--text-gray); background-color: #f8f9fa; border-left: 4px solid var(--primary); padding: 15px; border-radius: 6px; text-align: left;
+  margin: 15px 0; line-height: 1.6; }
+.warning-tip { font-size: 13px; color: #b71c1c; background-color: #fce4e4; border-left: 4px solid #f44336; padding: 15px; border-radius: 6px; text-align: left;
+  margin: 15px 0; line-height: 1.6; }
+.success-icon { font-size: 50px; margin-bottom: 10px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <!-- FORM SECTION -->
+  <div id="formSection">
+    <div class="header">
+      <div class="subtitle">KIKU BARA CENTER</div>
+      <h1 class="title">ĐĂNG KÝ CHUYÊN ĐỀ:<br>CHĂM SÓC DA VỚI SỮA CHUA THẢO MỘC</h1>
+      <p style="font-size: 13px; color: var(--text-gray); margin: 0;">(Học viên cũ nhập mã: KIKU để được miễn phí)</p>
+    </div>
+    <form id="regForm" onsubmit="submitForm(event)">
+      <div class="form-group"><label>Họ và tên *</label><input type="text" id="name" required placeholder="Ví dụ: Nguyễn Văn A"></div>
+      <div class="form-group"><label>Số điện thoại (Có Zalo) *</label><input type="tel" id="phone" required placeholder="Ví dụ: 0912345678"></div>
+      <div class="form-group"><label>Email (Nhận quyền học) *</label><input type="email" id="email" required placeholder="Ví dụ: name@gmail.com"></div>
+      <div class="form-group"><label>Mã giảm giá (Nếu có)</label><input type="text" id="promo" placeholder="Nhập mã KIKU nếu bạn là học viên cũ"></div>
+      <button type="submit" id="submitBtn">ĐĂNG KÝ NGAY</button>
+    </form>
+  </div>
+  
+  <!-- QR SECTION CHO HỌC VIÊN MỚI (CÓ PHÍ) -->
+  <div id="qrSection">
+    <div class="header">
+      <div class="subtitle">THÀNH CÔNG</div>
+      <h2 class="title" style="color: var(--primary);">THÔNG TIN ĐÃ ĐƯỢC GHI NHẬN!</h2>
+    </div>
+    <div class="qr-box">
+      <img id="qrImage" src="" alt="Mã VietQR Thanh Toán">
+      <div class="save-instruction">
+        👇 <b>HƯỚNG DẪN LƯU MÃ:</b><br>
+        Chạm và giữ ngón tay vào ảnh trên để lưu (Hoặc click chuột phải nếu bạn đang dùng máy tính).
+      </div>
+      <div class="amount" id="qrAmount">0 đ</div>
+      <div class="transfer-content-box">
+        <p style="font-size: 12px; margin: 0 0 8px 0; color: var(--text-gray);">Nội dung chuyển khoản chính xác:</p>
+        <div class="transfer-content" id="qrContent">...</div>
+      </div>
+    </div>
+    <div class="warning-tip">⚠️ <b>TUYỆT ĐỐI KHÔNG THAY ĐỔI NỘI DUNG CHUYỂN KHOẢN</b><br>Hệ thống đối soát hoạt động dựa trên nội dung này. Việc thay đổi sẽ làm đơn hàng không được ghi nhận tự động.</div>
+    <div class="info-tip">💡 <b>HƯỚNG DẪN TIẾP THEO:</b><br><br>1. Mở App Ngân hàng, chọn tính năng quét QR và tải ảnh vừa lưu lên.<br>2. Chờ tài khoản được kích hoạt, hệ thống sẽ gửi Email xác nhận và cấp quyền khóa học cho bạn.</div>
+  </div>
+
+  <!-- SUCCESS SECTION CHO HỌC VIÊN CŨ (MIỄN PHÍ) -->
+  <div id="freeSuccessSection">
+    <div class="header">
+      <div class="success-icon">🎉</div>
+      <div class="subtitle">CHÚC MỪNG BẠN</div>
+      <h2 class="title" style="color: var(--primary);">ĐĂNG KÝ NHẬN QUÀ THÀNH CÔNG!</h2>
+    </div>
+    <div class="info-tip" style="text-align: center; font-size: 15px;">
+      <b>Khóa học đã được tặng MIỄN PHÍ dành cho bạn!</b><br><br>
+      Hệ thống đã tự động ghi nhận và đang tiến hành cấp quyền. <br><br>
+      👉 <b>Vui lòng kiểm tra Email (Hộp thư đến hoặc Spam)</b> gửi từ hệ thống để nhận đường link vào lớp học.
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Lấy mã đối tác từ URL (ví dụ: ?ref=kikubara)
+  const urlParams = new URLSearchParams(window.location.search);
+  let CURRENT_PARTNER = urlParams.get('ref') || "";
+
+  function submitForm(event) {
+    event.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    btn.innerText = "ĐANG XỬ LÝ DỮ LIỆU..."; btn.disabled = true;
+
+    // Lấy dữ liệu từ Form
+    const data = {
+      name: document.getElementById('name').value,
+      phone: document.getElementById('phone').value,
+      email: document.getElementById('email').value,
+      promo: document.getElementById('promo').value,
+      partnerCode: CURRENT_PARTNER
+    };
+
+    // ĐÃ TÍCH HỢP ĐƯỜNG LINK WEB APP BẠN CUNG CẤP
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyTGLFlsIGIPC3YKVejkkEQqFuqpUCb-IXpXa_L19NlcBTI8gAioy_QftM8F72yxEmc/exec";
+
+    fetch(WEB_APP_URL, {
+      redirect: "follow",
+      method: "POST",
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8",
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => {
+      if (!response.ok) throw new Error("HTTP Status: " + response.status);
+      return response.text();
+    })
+    .then(text => {
+      try {
+        const res = JSON.parse(text);
+        if (res.success) {
+          // Điều hướng giao diện dựa theo cờ isFree từ Backend
+          if (res.isFree) {
+            goToFreeSuccessStep();
+          } else {
+            goToQrStep(res);
+          }
+        } else {
+          alert("❌ " + res.message);
+          btn.innerText = "ĐĂNG KÝ NGAY"; btn.disabled = false;
+        }
+      } catch (parseError) {
+        console.error("Lỗi trả về từ Google Script:", text);
+        alert("Hệ thống xử lý báo lỗi. Vui lòng thử lại sau.");
+        btn.innerText = "ĐĂNG KÝ NGAY"; btn.disabled = false;
+      }
+    })
+    .catch(err => {
+      console.error("Lỗi Fetch Mạng:", err);
+      alert("Lỗi kết nối mạng cục bộ. Vui lòng kiểm tra lại mạng và thử lại!");
+      btn.innerText = "ĐĂNG KÝ NGAY"; btn.disabled = false;
+    });
+  }
+
+  function goToQrStep(res) {
+    document.getElementById('formSection').style.display = 'none';
+    document.getElementById('qrSection').style.display = 'block';
+    
+    // Đổ dữ liệu mã QR, số tiền, cú pháp
+    document.getElementById('qrImage').src = res.qrUrl;
+    document.getElementById('qrAmount').innerText = new Intl.NumberFormat('vi-VN').format(res.amount) + ' VNĐ';
+    document.getElementById('qrContent').innerText = res.content;
+  }
+
+  function goToFreeSuccessStep() {
+    document.getElementById('formSection').style.display = 'none';
+    document.getElementById('freeSuccessSection').style.display = 'block';
+  }
+</script>
+</body>
+</html>
