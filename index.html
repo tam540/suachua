@@ -57,7 +57,22 @@ button:disabled { background-color: #a0b2b0; cursor: not-allowed; }
 </head>
 <body>
 <div class="container">
-  <!-- FORM SECTION -->
+
+  <!-- MÀN HÌNH THÔNG BÁO ĐÓNG ĐĂNG KÝ -->
+  <div id="closedSection" style="text-align: center;">
+    <div class="header">
+      <div class="subtitle">KIKU BARA CENTER</div>
+      <h1 class="title">ĐÃ ĐÓNG ĐĂNG KÝ</h1>
+    </div>
+    
+    <div class="warning-tip" style="text-align: center; font-size: 15px;">
+      Chuyên đề <b>Chăm sóc da với sữa chua thảo mộc</b> hiện tại đã đóng cổng đăng ký.<br><br>
+      Cảm ơn sự quan tâm của bạn. Hẹn gặp lại các anh chị tại các chương trình đào tạo hấp dẫn khác của <b>Kiku Bara Center</b>!
+    </div>
+  </div>
+
+  <!-- FORM SECTION ĐÃ BỊ ẨN ĐỂ KHÓA ĐĂNG KÝ -->
+  <!-- 
   <div id="formSection">
     <div class="header">
       <div class="subtitle">KIKU BARA CENTER</div>
@@ -72,8 +87,10 @@ button:disabled { background-color: #a0b2b0; cursor: not-allowed; }
       <button type="submit" id="submitBtn">ĐĂNG KÝ NGAY</button>
     </form>
   </div>
+  -->
   
-  <!-- QR SECTION CHO HỌC VIÊN MỚI (CÓ PHÍ) -->
+  <!-- QR SECTION CHO HỌC VIÊN MỚI (ĐÃ BỊ ẨN) -->
+  <!--
   <div id="qrSection">
     <div class="header">
       <div class="subtitle">THÀNH CÔNG</div>
@@ -94,8 +111,10 @@ button:disabled { background-color: #a0b2b0; cursor: not-allowed; }
     <div class="warning-tip">⚠️ <b>TUYỆT ĐỐI KHÔNG THAY ĐỔI NỘI DUNG CHUYỂN KHOẢN</b><br>Hệ thống đối soát hoạt động dựa trên nội dung này. Việc thay đổi sẽ làm đơn hàng không được ghi nhận tự động.</div>
     <div class="info-tip">💡 <b>HƯỚNG DẪN TIẾP THEO:</b><br><br>1. Mở App Ngân hàng, chọn tính năng quét QR và tải ảnh vừa lưu lên.<br>2. Chờ tài khoản được kích hoạt, hệ thống sẽ gửi Email xác nhận và cấp quyền khóa học cho bạn.</div>
   </div>
+  -->
 
-  <!-- SUCCESS SECTION CHO HỌC VIÊN CŨ (MIỄN PHÍ) -->
+  <!-- SUCCESS SECTION CHO HỌC VIÊN CŨ (ĐÃ BỊ ẨN) -->
+  <!--
   <div id="freeSuccessSection">
     <div class="header">
       <div class="success-icon">🎉</div>
@@ -108,84 +127,12 @@ button:disabled { background-color: #a0b2b0; cursor: not-allowed; }
       👉 <b>Vui lòng kiểm tra Email (Hộp thư đến hoặc Spam)</b> gửi từ hệ thống để nhận đường link vào lớp học.
     </div>
   </div>
+  -->
 
 </div>
 
 <script>
-  // Lấy mã đối tác từ URL (ví dụ: ?ref=kikubara)
-  const urlParams = new URLSearchParams(window.location.search);
-  let CURRENT_PARTNER = urlParams.get('ref') || "";
-
-  function submitForm(event) {
-    event.preventDefault();
-    const btn = document.getElementById('submitBtn');
-    btn.innerText = "ĐANG XỬ LÝ DỮ LIỆU..."; btn.disabled = true;
-
-    // Lấy dữ liệu từ Form
-    const data = {
-      name: document.getElementById('name').value,
-      phone: document.getElementById('phone').value,
-      email: document.getElementById('email').value,
-      promo: document.getElementById('promo').value,
-      partnerCode: CURRENT_PARTNER
-    };
-
-    // ĐÃ TÍCH HỢP ĐƯỜNG LINK WEB APP BẠN CUNG CẤP
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyTGLFlsIGIPC3YKVejkkEQqFuqpUCb-IXpXa_L19NlcBTI8gAioy_QftM8F72yxEmc/exec";
-
-    fetch(WEB_APP_URL, {
-      redirect: "follow",
-      method: "POST",
-      headers: {
-        "Content-Type": "text/plain;charset=utf-8",
-      },
-      body: JSON.stringify(data)
-    })
-    .then(response => {
-      if (!response.ok) throw new Error("HTTP Status: " + response.status);
-      return response.text();
-    })
-    .then(text => {
-      try {
-        const res = JSON.parse(text);
-        if (res.success) {
-          // Điều hướng giao diện dựa theo cờ isFree từ Backend
-          if (res.isFree) {
-            goToFreeSuccessStep();
-          } else {
-            goToQrStep(res);
-          }
-        } else {
-          alert("❌ " + res.message);
-          btn.innerText = "ĐĂNG KÝ NGAY"; btn.disabled = false;
-        }
-      } catch (parseError) {
-        console.error("Lỗi trả về từ Google Script:", text);
-        alert("Hệ thống xử lý báo lỗi. Vui lòng thử lại sau.");
-        btn.innerText = "ĐĂNG KÝ NGAY"; btn.disabled = false;
-      }
-    })
-    .catch(err => {
-      console.error("Lỗi Fetch Mạng:", err);
-      alert("Lỗi kết nối mạng cục bộ. Vui lòng kiểm tra lại mạng và thử lại!");
-      btn.innerText = "ĐĂNG KÝ NGAY"; btn.disabled = false;
-    });
-  }
-
-  function goToQrStep(res) {
-    document.getElementById('formSection').style.display = 'none';
-    document.getElementById('qrSection').style.display = 'block';
-    
-    // Đổ dữ liệu mã QR, số tiền, cú pháp
-    document.getElementById('qrImage').src = res.qrUrl;
-    document.getElementById('qrAmount').innerText = new Intl.NumberFormat('vi-VN').format(res.amount) + ' VNĐ';
-    document.getElementById('qrContent').innerText = res.content;
-  }
-
-  function goToFreeSuccessStep() {
-    document.getElementById('formSection').style.display = 'none';
-    document.getElementById('freeSuccessSection').style.display = 'block';
-  }
+  // Script xử lý form đã được vô hiệu hóa để đảm bảo an toàn tuyệt đối khi cổng đăng ký đóng.
 </script>
 </body>
 </html>
